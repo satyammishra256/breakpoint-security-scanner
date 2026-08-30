@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BREAKPOINT - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-primary": "#ac322e",
+                      "outline": "#a78a87",
+                      "status-safe": "#4D6B51",
+                      "surface-container-highest": "#353437",
+                      "on-secondary-fixed-variant": "#474649",
+                      "on-primary-container": "#ff9a91",
+                      "burgundy-accent": "#8B1A1A",
+                      "tertiary": "#c8c6c8",
+                      "background": "#131315",
+                      "primary-container": "#8b1a1a",
+                      "tertiary-container": "#474749",
+                      "surface-dim": "#131315",
+                      "tertiary-fixed": "#e4e2e4",
+                      "on-tertiary-fixed": "#1b1b1d",
+                      "on-surface": "#e5e1e4",
+                      "status-medium": "#B58900",
+                      "on-tertiary": "#303032",
+                      "on-tertiary-container": "#b7b5b7",
+                      "on-surface-variant": "#e0bfbc",
+                      "surface-variant": "#353437",
+                      "inverse-on-surface": "#303032",
+                      "inverse-surface": "#e5e1e4",
+                      "on-background": "#e5e1e4",
+                      "secondary-container": "#474649",
+                      "secondary": "#c8c6c8",
+                      "surface-tint": "#ffb3ac",
+                      "surface-container-high": "#2a2a2c",
+                      "tertiary-fixed-dim": "#c8c6c8",
+                      "graphite-base": "#131315",
+                      "on-tertiary-fixed-variant": "#474649",
+                      "surface-bright": "#39393b",
+                      "charcoal-surface": "#1B1B1D",
+                      "on-secondary-fixed": "#1b1b1d",
+                      "outline-variant": "#58413f",
+                      "surface": "#131315",
+                      "status-high": "#C45500",
+                      "surface-container-lowest": "#0e0e10",
+                      "on-primary": "#680007",
+                      "surface-container": "#1f1f21",
+                      "on-secondary": "#303032",
+                      "on-secondary-container": "#b7b4b7",
+                      "on-primary-fixed-variant": "#8a1a1a",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-low": "#1b1b1d",
+                      "error": "#ffb4ab",
+                      "on-error": "#690005",
+                      "primary-fixed-dim": "#ffb3ac",
+                      "on-primary-fixed": "#410003",
+                      "secondary-fixed-dim": "#c8c6c8",
+                      "status-critical": "#8B1A1A",
+                      "off-white-text": "#F0F0F0",
+                      "error-container": "#93000a",
+                      "primary-fixed": "#ffdad6",
+                      "border-technical": "#2A2A2E",
+                      "primary": "#ffb3ac",
+                      "secondary-fixed": "#e4e2e4",
+                      "steel-gray": "#808085"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "32px",
+                      "unit": "4px",
+                      "margin-mobile": "16px",
+                      "panel-gap": "1px",
+                      "gutter": "20px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-mono": [
+                              "Geist"
+                      ],
+                      "title-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "code-sm": [
+                              "Geist"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "title-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "15px",
+                              {
+                                      "lineHeight": "22px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "code-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "52px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .broken-path-h {
+            position: relative;
+        }
+        .broken-path-h::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 8px;
+            right: 8px;
+            height: 1px;
+            background-color: theme('colors.border-technical');
+            z-index: 10;
+        }
+        .broken-path-v {
+            position: relative;
+        }
+        .broken-path-v::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            bottom: 8px;
+            right: -1px;
+            width: 1px;
+            background-color: theme('colors.border-technical');
+            z-index: 10;
+        }
+        
+        .technical-grid {
+            background-size: 16px 16px;
+            background-image: radial-gradient(circle, theme('colors.border-technical') 1px, transparent 1px);
+        }
+        
+        .bracket-focus:focus-within {
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            border-left-width: 2px;
+            border-right-width: 2px;
+            border-left-color: theme('colors.burgundy-accent');
+            border-right-color: theme('colors.burgundy-accent');
+        }
+      </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex selection:bg-burgundy-accent selection:text-off-white-text">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col fixed h-full z-50 overflow-y-auto docked h-screen w-64 left-0 top-0 border-r border-border-technical bg-surface-container-lowest">
+<div class="p-6 broken-path-h border-b border-border-technical">
+<h1 class="font-display-lg text-display-lg font-bold text-burgundy-accent dark:text-burgundy-accent tracking-tighter">BREAKPOINT</h1>
+<p class="font-label-mono text-label-mono uppercase tracking-wider text-steel-gray mt-1">V2.4.0-STABLE</p>
+</div>
+<div class="flex-1 py-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-off-white-text border-l-4 border-primary transition-all duration-150 ease-in-out font-label-mono text-label-mono uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-steel-gray hover:text-off-white-text hover:bg-surface-container-high transition-all duration-150 ease-in-out font-label-mono text-label-mono uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">security</span>
+<span>Security Scan</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-steel-gray hover:text-off-white-text hover:bg-surface-container-high transition-all duration-150 ease-in-out font-label-mono text-label-mono uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span>Attack Paths</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-steel-gray hover:text-off-white-text hover:bg-surface-container-high transition-all duration-150 ease-in-out font-label-mono text-label-mono uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">bug_report</span>
+<span>Vulnerabilities</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-steel-gray hover:text-off-white-text hover:bg-surface-container-high transition-all duration-150 ease-in-out font-label-mono text-label-mono uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Assets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-steel-gray hover:text-off-white-text hover:bg-surface-container-high transition-all duration-150 ease-in-out font-label-mono text-label-mono uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span>Attack Simulation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-steel-gray hover:text-off-white-text hover:bg-surface-container-high transition-all duration-150 ease-in-out font-label-mono text-label-mono uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span>What-If Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-steel-gray hover:text-off-white-text hover:bg-surface-container-high transition-all duration-150 ease-in-out font-label-mono text-label-mono uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">refresh</span>
+<span>Re-scan</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-steel-gray hover:text-off-white-text hover:bg-surface-container-high transition-all duration-150 ease-in-out font-label-mono text-label-mono uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">compare</span>
+<span>Before/After</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 md:left-64 flex justify-between items-center px-gutter z-40 bg-surface-container dark:bg-surface-container h-16 border-b border-border-technical w-full md:w-auto">
+<div class="flex items-center gap-6 h-full">
+<!-- Mobile Logo Fallback -->
+<h1 class="md:hidden font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">BREAKPOINT</h1>
+<nav class="hidden md:flex items-center gap-6 h-full">
+<a class="h-full flex items-center font-label-mono text-label-mono text-primary border-b-2 border-primary pb-1 cursor-pointer" href="#">CONNECTED VEHICLE</a>
+<a class="h-full flex items-center font-label-mono text-label-mono text-steel-gray hover:text-on-surface hover:bg-surface-container-highest transition-colors cursor-pointer px-2" href="#">SECURE</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex bg-burgundy-accent text-off-white-text font-label-mono text-label-mono px-4 py-2 hover:bg-opacity-90 transition-opacity">
+                    Run New Scan
+                </button>
+<button class="text-steel-gray hover:text-on-surface transition-colors cursor-pointer active:opacity-80 p-2 hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">notifications_active</span>
+</button>
+<button class="text-steel-gray hover:text-on-surface transition-colors cursor-pointer active:opacity-80 p-2 hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<main class="flex-1 mt-16 p-margin-mobile md:p-margin-desktop bg-background technical-grid flex flex-col gap-4">
+<!-- Dashboard Header Context -->
+<div class="flex flex-col md:flex-row md:items-end justify-between border-b border-border-technical pb-4 gap-4 broken-path-h">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="font-label-mono text-label-mono text-steel-gray uppercase">Environment:</span>
+<span class="font-label-mono text-label-mono text-off-white-text">Connected Vehicle</span>
+<span class="mx-2 text-border-technical">|</span>
+<span class="font-label-mono text-label-mono text-steel-gray uppercase">Status:</span>
+<span class="font-label-mono text-label-mono text-status-safe flex items-center gap-1">
+<span class="w-2 h-2 bg-status-safe rounded-none inline-block"></span> Active
+                        </span>
+</div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-off-white-text">Decision Matrix</h2>
+</div>
+<div class="font-label-mono text-label-mono text-steel-gray flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                    Last Analysis: 12m ago
+                </div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-unit auto-rows-min mt-4">
+<!-- Section 1: Security Posture Score (Spans 4 cols on desktop) -->
+<section class="col-span-1 md:col-span-4 bg-charcoal-surface border border-border-technical flex flex-col h-full min-h-[300px]">
+<div class="p-4 border-b border-border-technical broken-path-h bg-surface-container">
+<h3 class="font-label-mono text-label-mono text-steel-gray uppercase tracking-wider">Security Posture Score</h3>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center p-6 relative">
+<!-- Score Visualization -->
+<div class="relative w-40 h-40 flex items-center justify-center mb-6">
+<!-- Abstract chart representation -->
+<svg class="absolute inset-0 w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="theme('colors.border-technical')" stroke-width="2"></circle>
+<circle cx="50" cy="50" fill="none" r="45" stroke="theme('colors.burgundy-accent')" stroke-dasharray="282.7" stroke-dashoffset="163.9" stroke-width="6"></circle> <!-- 42% of 282.7 -->
+</svg>
+<div class="text-center z-10">
+<span class="font-display-lg text-display-lg text-off-white-text block leading-none">42</span>
+<span class="font-label-mono text-label-mono text-steel-gray">/100</span>
+</div>
+</div>
+<div class="w-full text-center">
+<span class="inline-block bg-status-critical text-off-white-text font-label-mono text-label-mono px-3 py-1 mb-4 uppercase">High Risk</span>
+<div class="text-left w-full mt-2">
+<p class="font-code-sm text-code-sm text-steel-gray mb-1 uppercase">Key Degradation Factors:</p>
+<ul class="font-body-sm text-body-sm text-on-surface space-y-2">
+<li class="flex items-start gap-2">
+<span class="text-burgundy-accent mt-1">▪</span>
+<span>Exposed attack vectors to Powertrain ECU.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-status-medium mt-1">▪</span>
+<span>Missing network segmentation on Vehicle Gateway.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Highest Priority Attack Path (Spans 8 cols on desktop) -->
+<section class="col-span-1 md:col-span-8 bg-charcoal-surface border border-primary flex flex-col h-full min-h-[300px]">
+<div class="p-4 border-b border-border-technical broken-path-h bg-surface-container flex justify-between items-center">
+<h3 class="font-label-mono text-label-mono text-steel-gray uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">warning</span>
+                            Highest Priority Attack Path
+                        </h3>
+<span class="bg-status-critical text-off-white-text font-label-mono text-label-mono px-2 py-1 uppercase">Critical Risk 92</span>
+</div>
+<div class="flex-1 p-6 flex flex-col justify-center">
+<div class="text-code-sm font-code-sm text-steel-gray mb-4">PATH-01_EXECUTION_CHAIN</div>
+<!-- Topology Node Path -->
+<div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2 md:gap-0 relative mb-8">
+<!-- Node 1 -->
+<div class="flex flex-col items-center z-10 w-full md:w-auto">
+<div class="w-16 h-16 border border-border-technical bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-steel-gray">phone_iphone</span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface">Mobile App</span>
+</div>
+<!-- Divider (Desktop) -->
+<div class="hidden md:block flex-1 h-px bg-border-technical relative mx-2">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t border-r border-border-technical rotate-45"></div>
+</div>
+<!-- Divider (Mobile) -->
+<div class="md:hidden flex justify-center py-2 text-border-technical">
+<span class="material-symbols-outlined">arrow_downward</span>
+</div>
+<!-- Node 2 -->
+<div class="flex flex-col items-center z-10 w-full md:w-auto">
+<div class="w-16 h-16 border border-border-technical bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-steel-gray">directions_car</span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface">Infotainment</span>
+</div>
+<!-- Divider (Desktop) -->
+<div class="hidden md:block flex-1 h-px bg-border-technical relative mx-2">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t border-r border-border-technical rotate-45"></div>
+</div>
+<!-- Divider (Mobile) -->
+<div class="md:hidden flex justify-center py-2 text-border-technical">
+<span class="material-symbols-outlined">arrow_downward</span>
+</div>
+<!-- Node 3 -->
+<div class="flex flex-col items-center z-10 w-full md:w-auto">
+<div class="w-16 h-16 border border-border-technical bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-steel-gray">router</span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface">Vehicle Gateway</span>
+</div>
+<!-- Divider (Desktop) -->
+<div class="hidden md:block flex-1 h-px bg-burgundy-accent relative mx-2">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t border-r border-burgundy-accent rotate-45"></div>
+</div>
+<!-- Divider (Mobile) -->
+<div class="md:hidden flex justify-center py-2 text-burgundy-accent">
+<span class="material-symbols-outlined">arrow_downward</span>
+</div>
+<!-- Node 4 (Active/Target) -->
+<div class="flex flex-col items-center z-10 w-full md:w-auto">
+<div class="w-16 h-16 border-2 border-burgundy-accent bg-charcoal-surface flex items-center justify-center mb-2 relative shadow-[0_0_15px_rgba(139,26,26,0.3)]">
+<span class="material-symbols-outlined text-burgundy-accent">memory</span>
+</div>
+<span class="font-code-sm text-code-sm text-off-white-text font-bold">Powertrain ECU</span>
+</div>
+</div>
+<div class="flex justify-end mt-auto pt-4 border-t border-border-technical border-dashed">
+<button class="bg-transparent border border-burgundy-accent text-off-white-text font-label-mono text-label-mono px-4 py-2 hover:border-2 transition-all flex items-center gap-2">
+                                Explore Path <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section 3: Critical Assets At Risk (Spans 6 cols on desktop) -->
+<section class="col-span-1 md:col-span-6 bg-charcoal-surface border border-border-technical flex flex-col min-h-[250px]">
+<div class="p-4 border-b border-border-technical broken-path-h bg-surface-container">
+<h3 class="font-label-mono text-label-mono text-steel-gray uppercase tracking-wider">Critical Assets At Risk</h3>
+</div>
+<div class="flex-1 p-0 flex flex-col">
+<!-- Asset Row 1 -->
+<div class="flex items-center justify-between p-4 border-b border-border-technical hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 border border-burgundy-accent bg-surface-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-burgundy-accent">memory</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-off-white-text m-0 leading-tight">Powertrain ECU</h4>
+<p class="font-code-sm text-code-sm text-steel-gray mt-1">ID: AST-0922-PT</p>
+</div>
+</div>
+<div class="text-right">
+<span class="block font-label-mono text-label-mono text-status-critical mb-1 uppercase">Direct Exposure</span>
+<span class="font-code-sm text-code-sm text-steel-gray border border-border-technical px-2 py-1">2 Paths</span>
+</div>
+</div>
+<!-- Asset Row 2 -->
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 border border-border-technical bg-surface-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-steel-gray">router</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-off-white-text m-0 leading-tight">Vehicle Gateway</h4>
+<p class="font-code-sm text-code-sm text-steel-gray mt-1">ID: AST-1044-VG</p>
+</div>
+</div>
+<div class="text-right">
+<span class="block font-label-mono text-label-mono text-status-medium mb-1 uppercase">Pivotal Node</span>
+<span class="font-code-sm text-code-sm text-steel-gray border border-border-technical px-2 py-1">5 Paths</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Top Findings Table (Spans 6 cols on desktop) -->
+<section class="col-span-1 md:col-span-6 bg-charcoal-surface border border-border-technical flex flex-col min-h-[250px]">
+<div class="p-4 border-b border-border-technical broken-path-h bg-surface-container flex justify-between items-center">
+<h3 class="font-label-mono text-label-mono text-steel-gray uppercase tracking-wider">Top Findings</h3>
+<a class="font-label-mono text-label-mono text-steel-gray hover:text-off-white-text underline decoration-border-technical" href="#">View All</a>
+</div>
+<div class="flex-1 overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface border-b border-border-technical">
+<th class="p-3 font-label-mono text-label-mono text-steel-gray uppercase font-normal w-1/2">Finding</th>
+<th class="p-3 font-label-mono text-label-mono text-steel-gray uppercase font-normal">Severity</th>
+<th class="p-3 font-label-mono text-label-mono text-steel-gray uppercase font-normal text-right">Target</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-border-technical hover:bg-surface-container-high transition-colors">
+<td class="p-3 font-body-sm text-body-sm text-on-surface">Weak Authentication implementation on local diagnostic port.</td>
+<td class="p-3">
+<span class="bg-status-critical text-off-white-text font-label-mono text-label-mono px-2 py-0.5 uppercase">Critical</span>
+</td>
+<td class="p-3 font-code-sm text-code-sm text-steel-gray text-right">Infotainment</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="p-3 font-body-sm text-body-sm text-on-surface">Outdated configuration allows unauthorized lateral movement.</td>
+<td class="p-3">
+<span class="bg-status-high text-off-white-text font-label-mono text-label-mono px-2 py-0.5 uppercase" style="background-color: theme('colors.status-high');">High</span>
+</td>
+<td class="p-3 font-code-sm text-code-sm text-steel-gray text-right">Vehicle Gateway</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Bottom: Recommended Next Action (Spans 12 cols) -->
+<section class="col-span-1 md:col-span-12 mt-4 bg-burgundy-accent/10 border-l-4 border-burgundy-accent p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-burgundy-accent text-[18px]">build</span>
+<h3 class="font-label-mono text-label-mono text-burgundy-accent uppercase tracking-wider font-bold">Recommended Next Action</h3>
+</div>
+<p class="font-title-md text-title-md text-off-white-text">Break <span class="font-code-sm text-code-sm bg-surface px-1 py-0.5 border border-border-technical ml-1 mr-1">PATH-01</span> first by enabling Network Segmentation.</p>
+<p class="font-body-sm text-body-sm text-steel-gray mt-1">This single remediation mitigates 92% of critical risk exposure to the Powertrain ECU.</p>
+</div>
+<button class="bg-burgundy-accent text-off-white-text font-label-mono text-label-mono px-6 py-3 hover:bg-opacity-90 transition-opacity whitespace-nowrap shrink-0">
+                        Initiate Remediation
+                    </button>
+</section>
+</div>
+</main>
+</div>
+<script src="../config.js"></script><script src="../app.js"></script></body></html>

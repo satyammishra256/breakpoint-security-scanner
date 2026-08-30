@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Attack Path Explorer - BREAKPOINT</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "status-critical": "#8B1A1A",
+                        "on-primary": "#680007",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#1a1b1f",
+                        "outline-variant": "#58413f",
+                        "secondary-container": "#46464b",
+                        "surface-container-low": "#1b1b1d",
+                        "tertiary": "#96ccf8",
+                        "border-muted": "#2A2A2E",
+                        "outline": "#a78a87",
+                        "surface-container-lowest": "#0e0e10",
+                        "on-error-container": "#ffdad6",
+                        "status-high": "#C45500",
+                        "primary": "#ffb3ac",
+                        "secondary-fixed": "#e3e2e7",
+                        "primary-fixed-dim": "#ffb3ac",
+                        "text-primary": "#F0F0F0",
+                        "inverse-primary": "#ac322e",
+                        "on-error": "#690005",
+                        "surface-container-high": "#2a2a2c",
+                        "on-background": "#e5e1e4",
+                        "on-primary-fixed-variant": "#8a1a1a",
+                        "inverse-surface": "#e5e1e4",
+                        "primary-fixed": "#ffdad6",
+                        "on-surface-variant": "#e0bfbc",
+                        "surface-dim": "#131315",
+                        "surface-bright": "#39393b",
+                        "secondary": "#c7c6cb",
+                        "surface-container-highest": "#353437",
+                        "on-surface": "#e5e1e4",
+                        "on-secondary-container": "#b5b4ba",
+                        "secondary-fixed-dim": "#c7c6cb",
+                        "background": "#131315",
+                        "tertiary-fixed": "#cae6ff",
+                        "inverse-on-surface": "#303032",
+                        "on-secondary": "#2f3034",
+                        "on-tertiary-fixed": "#001e30",
+                        "surface-tint": "#ffb3ac",
+                        "tertiary-container": "#004c71",
+                        "surface-variant": "#353437",
+                        "primary-container": "#8b1a1a",
+                        "on-tertiary-container": "#86bce7",
+                        "status-medium": "#B58900",
+                        "tertiary-fixed-dim": "#96ccf8",
+                        "on-primary-fixed": "#410003",
+                        "surface": "#131315",
+                        "on-primary-container": "#ff9a91",
+                        "surface-container": "#201f21",
+                        "status-safe": "#4D6B51",
+                        "on-tertiary": "#00344f",
+                        "on-tertiary-fixed-variant": "#004b70",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#46464b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "panel-gap": "1px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "gutter": "20px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "code-sm": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "title-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "code-sm": ["11px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["15px", { "lineHeight": "22px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom grid pattern for technical canvas */
+        .tech-grid {
+            background-image: 
+                linear-gradient(to right, #2A2A2E 1px, transparent 1px),
+                linear-gradient(to bottom, #2A2A2E 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        
+        /* Broken path animations/styles */
+        .broken-line-x {
+            background-image: linear-gradient(to right, #2A2A2E 50%, transparent 50%);
+            background-size: 8px 1px;
+            background-repeat: repeat-x;
+        }
+        .broken-line-y {
+            background-image: linear-gradient(to bottom, #2A2A2E 50%, transparent 50%);
+            background-size: 1px 8px;
+            background-repeat: repeat-y;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen overflow-hidden flex">
+<!-- SideNavBar (Shared Component) -->
+<nav class="fixed left-0 top-0 h-full flex flex-col border-r border-border-muted w-64 bg-surface-container-low dark:bg-surface-container-low z-20 flex-shrink-0">
+<!-- Header -->
+<div class="p-6 border-b border-border-muted flex items-center gap-3">
+<div class="w-10 h-10 bg-surface border border-border-muted flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="admin_panel_settings" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-primary dark:text-primary">OP_USER_01</h2>
+<p class="font-label-mono text-label-mono text-on-surface-variant">CLEARANCE: LEVEL_4</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex-grow py-4 flex flex-col gap-1 overflow-y-auto">
+<!-- Inactive -->
+<a class="text-on-surface-variant hover:text-text-primary px-4 py-3 flex items-center gap-3 hover:bg-surface-container-high transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-mono text-label-mono">Overview</span>
+</a>
+<!-- Active (Threats aligns best with Attack Path Explorer) -->
+<a class="bg-primary-container text-on-primary-container border-l-4 border-primary px-4 py-3 flex items-center gap-3 scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="security" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="font-label-mono text-label-mono">Threats</span>
+</a>
+<!-- Inactive -->
+<a class="text-on-surface-variant hover:text-text-primary px-4 py-3 flex items-center gap-3 hover:bg-surface-container-high transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-label-mono text-label-mono">Logic</span>
+</a>
+<a class="text-on-surface-variant hover:text-text-primary px-4 py-3 flex items-center gap-3 hover:bg-surface-container-high transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-mono text-label-mono">Signals</span>
+</a>
+<a class="text-on-surface-variant hover:text-text-primary px-4 py-3 flex items-center gap-3 hover:bg-surface-container-high transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="font-label-mono text-label-mono">Registry</span>
+</a>
+<a class="text-on-surface-variant hover:text-text-primary px-4 py-3 flex items-center gap-3 hover:bg-surface-container-high transition-all duration-150 mt-auto" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-mono text-label-mono">Settings</span>
+</a>
+</div>
+<!-- CTA & Footer -->
+<div class="p-4 border-t border-border-muted flex flex-col gap-2">
+<button class="w-full bg-primary-container text-on-primary-container font-label-mono text-label-mono py-3 hover:bg-primary-container/80 transition-colors border border-primary">
+                NEW_SESSION
+            </button>
+<div class="flex justify-between mt-2">
+<a class="text-on-surface-variant hover:text-text-primary flex items-center gap-2 text-code-sm font-code-sm" href="#">
+<span class="material-symbols-outlined text-[16px]" data-icon="menu_book">menu_book</span> Documentation
+                </a>
+<a class="text-on-surface-variant hover:text-text-primary flex items-center gap-2 text-code-sm font-code-sm" href="#">
+<span class="material-symbols-outlined text-[16px]" data-icon="support_agent">support_agent</span> Support
+                </a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-grow ml-64 flex flex-col h-full bg-background relative">
+<!-- TopNavBar (Shared Component) - Adjusted to fit within main content area cleanly -->
+<header class="flex justify-between items-center h-16 px-margin-desktop w-full border-b border-border-muted bg-surface z-10 flex-shrink-0">
+<!-- Brand -->
+<div class="flex items-center gap-4">
+<h1 class="font-display-lg text-[24px] font-bold tracking-tighter text-on-surface dark:text-on-surface">BREAKPOINT</h1>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8 h-full">
+<a class="text-on-surface-variant font-medium font-label-mono text-label-mono hover:text-primary transition-colors duration-200 h-full flex items-center" href="#">DASHBOARD</a>
+<a class="text-on-surface-variant font-medium font-label-mono text-label-mono hover:text-primary transition-colors duration-200 h-full flex items-center" href="#">ANALYSIS</a>
+<!-- Active Link -->
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-mono text-label-mono h-full flex items-center scale-95 duration-100" href="#">NETWORK</a>
+<a class="text-on-surface-variant font-medium font-label-mono text-label-mono hover:text-primary transition-colors duration-200 h-full flex items-center" href="#">HARDWARE</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-6">
+<!-- Search (on right per JSON) -->
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]" data-icon="search">search</span>
+<input class="bg-surface-container-low border border-border-muted text-on-surface font-label-mono text-code-sm py-1.5 pl-9 pr-3 w-48 focus:outline-none focus:border-l-primary focus:border-r-primary focus:border-t-transparent focus:border-b-transparent transition-all" placeholder="Query entities..." type="text"/>
+</div>
+<div class="font-label-mono text-label-mono text-primary px-3 py-1 border border-border-muted bg-surface-container-low">
+                    [SYS_ENV: VEHICLE_A]
+                </div>
+</div>
+</header>
+<!-- Tool Canvas & Details Split -->
+<main class="flex-grow flex overflow-hidden">
+<!-- Central Interactive Node Graph Canvas -->
+<section class="flex-grow relative bg-surface-dim tech-grid overflow-hidden flex items-center justify-center p-8">
+<!-- Topology Container -->
+<div class="relative w-full max-w-4xl h-[600px] border border-border-muted bg-background/50 backdrop-blur-sm p-8">
+<!-- Broken Path Divider (Top decorative) -->
+<div class="absolute top-0 left-0 w-full flex items-center gap-1 opacity-50">
+<div class="h-px bg-border-muted w-[60%]"></div>
+<div class="h-px bg-border-muted w-[40%]"></div>
+</div>
+<!-- Canvas Label -->
+<div class="absolute top-4 left-4 flex items-center gap-2 text-on-surface-variant font-label-mono text-code-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="hub">hub</span>
+                        TOPOLOGY_VIEW // ACTIVE_PATH
+                    </div>
+<!-- Nodes & Paths Layout (Simulated with absolute positioning for precision) -->
+<!-- Node 1: Mobile App -->
+<div class="absolute top-1/2 left-[10%] -translate-y-1/2 flex flex-col items-center gap-2 z-10 group">
+<div class="w-12 h-12 bg-surface-container-high border border-border-muted flex items-center justify-center relative">
+<div class="absolute top-0 left-0 w-1 h-1 bg-primary"></div> <!-- Active indicator -->
+<span class="material-symbols-outlined text-text-primary" data-icon="smartphone">smartphone</span>
+</div>
+<span class="font-label-mono text-code-sm text-text-primary bg-surface border border-border-muted px-2 py-0.5">Mobile App</span>
+</div>
+<!-- Connection 1 -> 2 (Highlighted) -->
+<div class="absolute top-1/2 left-[calc(10%+48px)] w-[20%] h-px bg-primary z-0 -translate-y-1/2 before:content-[''] before:absolute before:right-0 before:-top-1 before:w-0 before:h-0 before:border-y-4 before:border-y-transparent before:border-l-[6px] before:border-l-primary"></div>
+<!-- Node 2: Infotainment -->
+<div class="absolute top-1/2 left-[35%] -translate-y-1/2 flex flex-col items-center gap-2 z-10">
+<div class="w-12 h-12 bg-primary-container border-2 border-primary flex items-center justify-center shadow-[0_0_15px_rgba(139,26,26,0.2)]">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="directions_car" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+</div>
+<span class="font-label-mono text-code-sm text-on-primary-container bg-primary-container/20 border border-primary px-2 py-0.5">Infotainment</span>
+</div>
+<!-- Connection 2 -> 3 (Highlighted) -->
+<div class="absolute top-1/2 left-[calc(35%+48px)] w-[20%] h-px bg-primary z-0 -translate-y-1/2 before:content-[''] before:absolute before:right-0 before:-top-1 before:w-0 before:h-0 before:border-y-4 before:border-y-transparent before:border-l-[6px] before:border-l-primary">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-mono text-[10px] text-primary bg-background px-1">TCP/443</div>
+</div>
+<!-- Node 3: Vehicle Gateway -->
+<div class="absolute top-1/2 left-[60%] -translate-y-1/2 flex flex-col items-center gap-2 z-10">
+<div class="w-14 h-14 bg-primary-container border-2 border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="router" style="font-variation-settings: 'FILL' 1;">router</span>
+</div>
+<span class="font-label-mono text-code-sm text-on-primary-container bg-primary-container/20 border border-primary px-2 py-0.5">Veh_Gateway</span>
+</div>
+<!-- Connection 3 -> 4 (Highlighted) -->
+<div class="absolute top-1/2 left-[calc(60%+56px)] w-[20%] h-px bg-primary z-0 -translate-y-1/2 before:content-[''] before:absolute before:right-0 before:-top-1 before:w-0 before:h-0 before:border-y-4 before:border-y-transparent before:border-l-[6px] before:border-l-primary">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-mono text-[10px] text-primary bg-background px-1">CAN_BUS_A</div>
+</div>
+<!-- Node 4: Powertrain ECU -->
+<div class="absolute top-1/2 right-[5%] -translate-y-1/2 flex flex-col items-center gap-2 z-10">
+<div class="w-12 h-12 bg-status-critical border border-primary flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined text-white" data-icon="memory" style="font-variation-settings: 'FILL' 1;">memory</span>
+</div>
+<span class="font-label-mono text-code-sm text-white bg-status-critical border border-primary px-2 py-0.5">Powertrain_ECU</span>
+</div>
+<!-- INACTIVE / BLOCKED PATHS (Broken Lines) -->
+<!-- Branch from Infotainment to Telematics (Blocked) -->
+<div class="absolute top-1/4 left-[35%] w-px h-[25%] broken-line-y z-0 -translate-x-1/2"></div>
+<div class="absolute top-1/4 left-[35%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2 z-10 opacity-50">
+<div class="w-10 h-10 bg-surface-container-high border border-border-muted flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="cell_tower">cell_tower</span>
+</div>
+<span class="font-label-mono text-[10px] text-on-surface-variant">Telematics</span>
+</div>
+<div class="absolute top-[35%] left-[35%] -translate-x-1/2 bg-surface border border-border-muted px-1 z-10">
+<span class="material-symbols-outlined text-[14px] text-border-muted" data-icon="block">block</span>
+</div>
+<!-- Branch from Gateway to BCM (Inactive) -->
+<div class="absolute bottom-1/4 left-[60%] w-px h-[25%] broken-line-y z-0 -translate-x-1/2"></div>
+<div class="absolute bottom-1/4 left-[60%] -translate-x-1/2 translate-y-1/2 flex flex-col items-center gap-2 z-10 opacity-60">
+<div class="w-10 h-10 bg-surface-container-high border border-border-muted flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="developer_board">developer_board</span>
+</div>
+<span class="font-label-mono text-[10px] text-on-surface-variant">Body_Control</span>
+</div>
+</div>
+</section>
+<!-- Right Panel: Path Details -->
+<aside class="w-[400px] border-l border-border-muted bg-surface-container-low flex flex-col flex-shrink-0">
+<!-- Panel Header -->
+<div class="p-6 border-b border-border-muted">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-text-primary tracking-tight">PATH-01</h3>
+<span class="bg-primary/10 text-primary border border-primary px-2 py-1 font-label-mono text-code-sm">ACTIVE</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Remote code execution via infotainment vulnerability leading to lateral movement across CAN bus.</p>
+</div>
+<!-- Risk Score Cell -->
+<div class="p-6 border-b border-border-muted bg-surface-container-highest relative overflow-hidden">
+<!-- Broken path decorative element -->
+<div class="absolute right-0 top-0 w-12 h-full flex flex-col justify-between opacity-20 py-2 items-center">
+<div class="w-px h-1/3 bg-border-muted"></div>
+<div class="w-px h-1/3 bg-border-muted"></div>
+</div>
+<div class="font-label-mono text-code-sm text-on-surface-variant mb-2 uppercase tracking-widest">Calculated Risk</div>
+<div class="flex items-baseline gap-3">
+<span class="font-display-lg text-[64px] text-primary leading-none">92</span>
+<span class="font-title-md text-title-md text-on-surface-variant">/ 100</span>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<div class="w-2 h-2 bg-status-critical"></div>
+<span class="font-label-mono text-label-mono text-status-critical">CRITICAL SEVERITY</span>
+</div>
+</div>
+<!-- Technical Metadata Details -->
+<div class="flex-grow p-6 overflow-y-auto">
+<div class="mb-6">
+<h4 class="font-label-mono text-label-mono text-text-primary mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="data_object">data_object</span>
+                            EXPLOIT_CHAIN
+                        </h4>
+<div class="flex flex-col gap-2">
+<div class="p-3 border border-border-muted bg-surface hover:border-outline-variant transition-colors group">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono text-code-sm text-text-primary">01. Initial Access</span>
+<span class="font-label-mono text-[10px] text-primary bg-primary/10 px-1">CVE-2023-4122</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant">Malicious payload delivered via compromised third-party mobile application.</p>
+</div>
+<div class="flex justify-center">
+<div class="w-px h-4 bg-border-muted"></div>
+</div>
+<div class="p-3 border border-border-muted bg-surface hover:border-outline-variant transition-colors">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono text-code-sm text-text-primary">02. Privilege Escalation</span>
+<span class="font-label-mono text-[10px] text-on-surface-variant bg-surface-bright px-1">0-DAY</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant">Buffer overflow in Infotainment OS media parser.</p>
+</div>
+<div class="flex justify-center">
+<div class="w-px h-4 bg-border-muted"></div>
+</div>
+<div class="p-3 border-l-2 border-l-primary border-t border-r border-b border-border-muted bg-primary-container/10">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono text-code-sm text-primary">03. Lateral Movement</span>
+<span class="font-label-mono text-[10px] text-primary bg-primary/10 px-1">ACTIVE</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant">Spoofed diagnostic packets bypassing Gateway packet filter routing to CAN_BUS_A.</p>
+</div>
+</div>
+</div>
+<!-- Divider -->
+<div class="w-full flex items-center gap-1 my-6 opacity-30">
+<div class="h-px bg-border-muted w-[30%]"></div>
+<div class="h-px bg-border-muted w-[70%]"></div>
+</div>
+<!-- Target Systems List -->
+<div>
+<h4 class="font-label-mono text-label-mono text-text-primary mb-3">AFFECTED_NODES</h4>
+<ul class="flex flex-col gap-0 border-t border-border-muted">
+<li class="py-3 border-b border-border-muted border-dotted flex justify-between items-center">
+<span class="font-label-mono text-code-sm text-on-surface-variant">INFOTAINMENT_UNIT</span>
+<span class="font-label-mono text-[10px] text-text-primary bg-surface-bright px-1 border border-border-muted">192.168.1.10</span>
+</li>
+<li class="py-3 border-b border-border-muted border-dotted flex justify-between items-center">
+<span class="font-label-mono text-code-sm text-on-surface-variant">CENTRAL_GATEWAY</span>
+<span class="font-label-mono text-[10px] text-text-primary bg-surface-bright px-1 border border-border-muted">192.168.1.1</span>
+</li>
+<li class="py-3 border-b border-border-muted border-dotted flex justify-between items-center">
+<span class="font-label-mono text-code-sm text-primary">POWERTRAIN_ECU</span>
+<span class="font-label-mono text-[10px] text-primary bg-primary/10 px-1 border border-primary/30">CAN_ID: 0x2A1</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="p-4 border-t border-border-muted bg-surface flex gap-3">
+<button class="flex-1 border border-border-muted bg-transparent text-text-primary font-label-mono text-code-sm py-2 hover:bg-surface-bright hover:border-outline transition-all">
+                        EXPORT_LOG
+                    </button>
+<button class="flex-1 bg-primary-container text-on-primary-container font-label-mono text-code-sm py-2 border border-primary hover:bg-primary-container/80 transition-colors">
+                        MITIGATE
+                    </button>
+</div>
+</aside>
+</main>
+</div>
+</body></html>

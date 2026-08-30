@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BREAKPOINT - Welcome</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "status-critical": "#8B1A1A",
+                        "on-primary": "#680007",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#1a1b1f",
+                        "outline-variant": "#58413f",
+                        "secondary-container": "#46464b",
+                        "surface-container-low": "#1b1b1d",
+                        "tertiary": "#96ccf8",
+                        "border-muted": "#2A2A2E",
+                        "outline": "#a78a87",
+                        "surface-container-lowest": "#0e0e10",
+                        "on-error-container": "#ffdad6",
+                        "status-high": "#C45500",
+                        "primary": "#ffb3ac",
+                        "secondary-fixed": "#e3e2e7",
+                        "primary-fixed-dim": "#ffb3ac",
+                        "text-primary": "#F0F0F0",
+                        "inverse-primary": "#ac322e",
+                        "on-error": "#690005",
+                        "surface-container-high": "#2a2a2c",
+                        "on-background": "#e5e1e4",
+                        "on-primary-fixed-variant": "#8a1a1a",
+                        "inverse-surface": "#e5e1e4",
+                        "primary-fixed": "#ffdad6",
+                        "on-surface-variant": "#e0bfbc",
+                        "surface-dim": "#131315",
+                        "surface-bright": "#39393b",
+                        "secondary": "#c7c6cb",
+                        "surface-container-highest": "#353437",
+                        "on-surface": "#e5e1e4",
+                        "on-secondary-container": "#b5b4ba",
+                        "secondary-fixed-dim": "#c7c6cb",
+                        "background": "#131315",
+                        "tertiary-fixed": "#cae6ff",
+                        "inverse-on-surface": "#303032",
+                        "on-secondary": "#2f3034",
+                        "on-tertiary-fixed": "#001e30",
+                        "surface-tint": "#ffb3ac",
+                        "tertiary-container": "#004c71",
+                        "surface-variant": "#353437",
+                        "primary-container": "#8b1a1a",
+                        "on-tertiary-container": "#86bce7",
+                        "status-medium": "#B58900",
+                        "tertiary-fixed-dim": "#96ccf8",
+                        "on-primary-fixed": "#410003",
+                        "surface": "#131315",
+                        "on-primary-container": "#ff9a91",
+                        "surface-container": "#201f21",
+                        "status-safe": "#4D6B51",
+                        "on-tertiary": "#00344f",
+                        "on-tertiary-fixed-variant": "#004b70",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#46464b"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "panel-gap": "1px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "gutter": "20px",
+                        "unit": "4px"
+                    },
+                    fontFamily: {
+                        "code-sm": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "title-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"]
+                    },
+                    fontSize: {
+                        "code-sm": ["11px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["15px", { "lineHeight": "22px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .broken-path-divider {
+            position: relative;
+            height: 1px;
+            width: 100%;
+        }
+        .broken-path-divider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 60%;
+            background-color: theme('colors.border-muted');
+        }
+        .broken-path-divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 38%;
+            background-color: theme('colors.border-muted');
+        }
+        
+        .technical-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, theme('colors.surface-container') 1px, transparent 1px),
+                linear-gradient(to bottom, theme('colors.surface-container') 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary min-h-screen flex flex-col font-body-md overflow-x-hidden selection:bg-primary-container selection:text-text-primary">
+<!-- Top Navigation (Transactional intent - simplified shell) -->
+<header class="w-full h-16 border-b border-border-muted bg-surface flex items-center justify-between px-margin-desktop shrink-0">
+<div class="flex items-center gap-4">
+<img alt="BREAKPOINT Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjbnvdjNtgnraUMvNCFz4OWW1X0btf1YPEbtafJgCueeCJxA-96BPivH4Gw15_zEVV4W-C79-HxWwu178_dMgbnv0R7rm8bwBPDntfj1s27EP4_ybEA3sXXEBT4PXl8BIeUV0wVIVCxcXYCukT4smHo3--AT8O0svawHHiqASl9XqX2MMFmNcwfgmxNx53F-3CwGdIaINm1ikEjoEmL5rAFy68Sj8s94an_4j4fLM6wAtLlGesn0REWw"/>
+<span class="font-display-lg text-title-md font-bold tracking-tighter text-on-surface border-l border-border-muted pl-4">BREAKPOINT</span>
+</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant">
+            SYS_INIT // SECURE_ENV
+        </div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col lg:flex-row relative">
+<!-- Left Panel: Content -->
+<div class="w-full lg:w-5/12 p-margin-mobile lg:p-margin-desktop flex flex-col justify-center border-r border-border-muted bg-surface z-10">
+<div class="max-w-md mx-auto lg:mx-0">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-highest border border-border-muted mb-8">
+<div class="w-2 h-2 bg-status-critical"></div>
+<span class="font-label-mono text-code-sm text-text-primary tracking-widest uppercase">Platform Orientation</span>
+</div>
+<h1 class="font-display-lg text-headline-lg-mobile lg:text-headline-lg text-text-primary mb-6">
+                    See how attackers could move through your system.
+                </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-10 leading-relaxed">
+                    BREAKPOINT connects isolated security weaknesses into potential attack paths. Visualize blast radius, map logical progression from endpoints to core ECUs, and validate structural fixes before deployment.
+                </p>
+<div class="broken-path-divider mb-10"></div>
+<div class="flex flex-col gap-6 mb-12">
+<!-- Feature 1 -->
+<div class="flex gap-4 items-start group">
+<div class="w-8 h-8 flex-shrink-0 border border-border-muted flex items-center justify-center group-hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary">route</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-text-primary mb-1">Attack Path Analysis</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Trace theoretical intrusion vectors across system boundaries.</p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="flex gap-4 items-start group">
+<div class="w-8 h-8 flex-shrink-0 border border-border-muted flex items-center justify-center group-hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary">crisis_alert</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-text-primary mb-1">Blast Radius</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Quantify structural compromise from any single compromised node.</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="flex gap-4 items-start group">
+<div class="w-8 h-8 flex-shrink-0 border border-border-muted flex items-center justify-center group-hover:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary">verified_user</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-text-primary mb-1">Fix Validation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Simulate mitigation logic before pushing structural changes.</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary-container text-[#fff5f5] hover:bg-inverse-primary transition-colors h-12 px-8 font-label-mono text-label-mono tracking-wide uppercase flex items-center justify-center">
+                        Initialize Session
+                    </button>
+<button class="border border-border-muted hover:border-border-muted/80 text-text-primary h-12 px-8 font-label-mono text-label-mono tracking-wide uppercase flex items-center justify-center bg-transparent">
+                        View Documentation
+                    </button>
+</div>
+</div>
+</div>
+<!-- Right Panel: Visual -->
+<div class="w-full lg:w-7/12 min-h-[50vh] lg:min-h-full bg-surface-dim technical-grid relative flex items-center justify-center overflow-hidden p-margin-desktop">
+<!-- Structural Grid Overlay -->
+<div class="absolute inset-0 pointer-events-none border-t border-b border-border-muted opacity-50"></div>
+<!-- Topology Visualization Wrapper -->
+<div class="relative w-full max-w-2xl aspect-video border border-border-muted bg-surface/80 backdrop-blur-sm p-8 flex items-center justify-center shadow-[inset_0_0_0_1px_rgba(42,42,46,1)]">
+<!-- Status indicator -->
+<div class="absolute top-0 left-0 w-1 h-1 bg-status-critical"></div>
+<div class="absolute top-4 right-4 font-code-sm text-code-sm text-on-surface-variant opacity-70">
+                    TOPOLOGY_ID: SIM_0X88A
+                </div>
+<!-- Abstract Topology -->
+<div class="w-full h-full relative flex items-center justify-between">
+<!-- Line connections -->
+<div class="absolute inset-0 z-0">
+<!-- Horizontal path -->
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-border-muted transform -translate-y-1/2 border-t border-dashed border-border-muted"></div>
+<!-- Branching path -->
+<div class="absolute top-1/4 left-[40%] w-[30%] h-[1px] bg-border-muted transform -translate-y-1/2"></div>
+<div class="absolute top-1/4 left-[40%] w-[1px] h-[25%] bg-border-muted"></div>
+</div>
+<!-- Node 1: Mobile App -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-12 h-12 border border-border-muted bg-surface-container-low flex items-center justify-center group hover:border-primary-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-text-primary">smartphone</span>
+</div>
+<span class="font-label-mono text-code-sm text-on-surface-variant">Mobile App</span>
+<div class="w-2 h-2 bg-status-critical absolute -top-1 -right-1 opacity-80 animate-pulse"></div>
+</div>
+<!-- Node 2: Infotainment -->
+<div class="relative z-10 flex flex-col items-center gap-2 mt-24">
+<div class="w-12 h-12 border border-border-muted bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">dns</span>
+</div>
+<span class="font-label-mono text-code-sm text-on-surface-variant">Infotainment</span>
+</div>
+<!-- Node 3: Gateway -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-16 h-16 border-2 border-border-muted bg-surface-container flex items-center justify-center relative">
+<div class="absolute top-0 left-0 w-full h-[2px] bg-status-medium opacity-50"></div>
+<span class="material-symbols-outlined text-on-surface text-[28px]">router</span>
+</div>
+<span class="font-label-mono text-code-sm text-text-primary font-bold">Gateway</span>
+</div>
+<!-- Node 4: ECU -->
+<div class="relative z-10 flex flex-col items-center gap-2 mb-16">
+<div class="w-12 h-12 border border-border-muted bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">memory</span>
+</div>
+<span class="font-label-mono text-code-sm text-on-surface-variant">Core ECU</span>
+</div>
+</div>
+</div>
+<!-- Decorative corner markers -->
+<div class="absolute top-4 left-4 w-2 h-2 border-t border-l border-border-muted"></div>
+<div class="absolute top-4 right-4 w-2 h-2 border-t border-r border-border-muted"></div>
+<div class="absolute bottom-4 left-4 w-2 h-2 border-b border-l border-border-muted"></div>
+<div class="absolute bottom-4 right-4 w-2 h-2 border-b border-r border-border-muted"></div>
+</div>
+</main>
+</body></html>

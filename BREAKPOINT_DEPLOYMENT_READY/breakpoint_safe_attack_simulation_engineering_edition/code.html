@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BREAKPOINT - Safe Attack Simulation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#b0b5be",
+                      "primary-fixed": "#ffdad6",
+                      "on-tertiary-fixed": "#2a1700",
+                      "on-error": "#690005",
+                      "inverse-surface": "#e2e2e8",
+                      "surface-tint": "#ffb4ab",
+                      "outline": "#87929a",
+                      "surface-dim": "#131315",
+                      "primary-container": "#8b1a1a",
+                      "on-error-container": "#ffdad6",
+                      "on-surface-variant": "#bdc8d1",
+                      "tertiary": "#ffc176",
+                      "on-secondary": "#2b3138",
+                      "on-primary-fixed-variant": "#93000a",
+                      "surface": "#131315",
+                      "inverse-primary": "#93000a",
+                      "primary": "#ffb4ab",
+                      "on-tertiary": "#472a00",
+                      "inverse-on-surface": "#2f3035",
+                      "error-container": "#93000a",
+                      "secondary-fixed": "#dde3ec",
+                      "on-secondary-fixed": "#161c23",
+                      "surface-variant": "#282a2e",
+                      "on-secondary-fixed-variant": "#41474f",
+                      "secondary": "#c1c7d0",
+                      "on-primary-fixed": "#410002",
+                      "on-background": "#e2e2e8",
+                      "outline-variant": "#3e484f",
+                      "surface-container-highest": "#333539",
+                      "primary-fixed-dim": "#ffb4ab",
+                      "tertiary-fixed": "#ffddb8",
+                      "background": "#131315",
+                      "error": "#ffb4ab",
+                      "tertiary-fixed-dim": "#ffb960",
+                      "secondary-container": "#41474f",
+                      "tertiary-container": "#f1a02b",
+                      "surface-container": "#1b1b1d",
+                      "on-tertiary-container": "#613b00",
+                      "surface-container-low": "#1b1b1d",
+                      "surface-bright": "#39393b",
+                      "on-primary": "#690005",
+                      "on-tertiary-fixed-variant": "#653e00",
+                      "secondary-fixed-dim": "#c1c7d0",
+                      "on-surface": "#e2e2e8",
+                      "on-primary-container": "#ffdad6",
+                      "surface-container-high": "#282a2e",
+                      "surface-container-lowest": "#0e0e10"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "sm": "8px",
+                      "unit": "4px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "container-max": "1440px",
+                      "xl": "32px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "title-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "mono-data": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-caps": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "title-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "mono-data": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Grid background for topology map */
+        .bg-topology-grid {
+            background-image: linear-gradient(to right, #282a2e 1px, transparent 1px),
+                              linear-gradient(to bottom, #282a2e 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+        }
+        
+        /* Subtle glow effects */
+        .glow-red {
+            box-shadow: 0 0 15px rgba(255, 180, 171, 0.2);
+        }
+        
+        .glow-blue {
+            box-shadow: 0 0 15px rgba(255, 180, 171, 0.2);
+        }
+
+        /* Glassmorphism utility */
+        .glass-panel {
+            background: rgba(19, 19, 21, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid #3e484f;
+        }
+        
+        /* Topology line animations */
+        @keyframes flowData {
+            0% { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
+        }
+        .animate-flow {
+            stroke-dasharray: 10;
+            animation: flowData 2s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen overflow-hidden flex selection:bg-primary-container selection:text-on-primary">
+<!-- Shared Component: SideNavBar -->
+<nav class="hidden md:flex bg-surface-container-low dark:bg-surface-container-low text-primary dark:text-primary-fixed-dim font-body-sm text-body-sm fixed left-0 top-0 h-screen w-[280px] border-r border-outline-variant flat no shadows flex-col py-lg px-md z-50">
+<!-- Brand Header -->
+<div class="mb-xl flex items-center gap-sm px-sm">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">hexagon</span>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary leading-none">BREAKPOINT</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-80 mt-1">Cybersecurity Analysis</p>
+</div>
+</div>
+<!-- Primary Navigation -->
+<ul class="flex flex-col gap-sm flex-1">
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant font-medium hover:bg-surface-variant hover:text-on-surface transition-colors Active: scale-[0.98] transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Overview
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant font-medium hover:bg-surface-variant hover:text-on-surface transition-colors Active: scale-[0.98] transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">security</span>
+                    Analyze
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-primary font-bold bg-secondary-container rounded-lg hover:bg-surface-variant hover:text-on-surface transition-colors Active: scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">psychology</span>
+                    Simulate
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant font-medium hover:bg-surface-variant hover:text-on-surface transition-colors Active: scale-[0.98] transition-transform duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">check_circle</span>
+                    Validate
+                </a>
+</li>
+</ul>
+<!-- Primary Action CTA -->
+<div class="mt-auto mb-lg">
+<button class="w-full bg-primary-container text-on-primary-container font-title-md text-title-md py-sm px-md rounded-DEFAULT hover:opacity-90 transition-opacity flex justify-center items-center gap-sm">
+<span class="material-symbols-outlined">play_arrow</span>
+                 Run New Scan
+             </button>
+</div>
+<!-- Footer Navigation -->
+<div class="border-t border-outline-variant pt-md">
+<ul class="flex flex-col gap-xs">
+<li>
+<a class="flex items-center gap-md px-md py-xs text-on-surface-variant font-medium hover:bg-surface-variant hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+                        Settings
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-xs text-on-surface-variant font-medium hover:bg-surface-variant hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+                        Support
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col ml-[280px] h-screen bg-background">
+<!-- Shared Component: TopNavBar -->
+<header class="bg-surface/80 backdrop-blur-xl text-primary font-label-caps text-label-caps docked full-width top-0 sticky z-40 border-b border-outline-variant flat no shadows flex justify-between items-center h-16 px-lg w-full max-w-full">
+<!-- Left Side: Nav Links -->
+<div class="flex items-center gap-lg">
+<nav class="hidden md:flex gap-lg h-full items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors Active: opacity-80 h-full flex items-center" href="#">
+                        Environment
+                    </a>
+<a class="text-on-surface-variant hover:text-primary transition-colors Active: opacity-80 h-full flex items-center" href="#">
+                        System Status
+                    </a>
+</nav>
+</div>
+<!-- Right Side: Actions & Profile -->
+<div class="flex items-center gap-md">
+<!-- Trailing Primary Action -->
+<button class="border border-outline-variant text-on-surface bg-transparent hover:bg-surface-variant transition-colors py-xs px-sm rounded-DEFAULT flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm">science</span>
+                    Execute Simulation
+                 </button>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-sm ml-sm pl-sm border-l border-outline-variant">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<main class="flex-1 overflow-hidden flex flex-col p-lg gap-lg">
+<!-- Context Header -->
+<div class="flex justify-between items-end pb-sm border-b border-outline-variant">
+<div>
+<div class="flex items-center gap-md mb-xs">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">SAFE ATTACK SIMULATION</h2>
+<div class="flex gap-sm">
+<span class="bg-primary-container/20 border border-primary-container text-primary px-sm py-[2px] rounded-full font-label-caps text-label-caps flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                SIMULATION MODE
+                            </span>
+<span class="bg-surface-variant border border-outline-variant text-on-surface-variant px-sm py-[2px] rounded-full font-label-caps text-label-caps flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+                                NO REAL SYSTEM CONNECTION
+                            </span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Replay a modeled attack path safely inside the simulated environment.</p>
+</div>
+<div class="text-right font-mono-data text-mono-data text-on-surface-variant flex flex-col gap-xs">
+<div class="flex items-center justify-end gap-sm">
+<span>PATH-01</span>
+<span class="text-outline-variant">|</span>
+<span class="text-error">RISK 92/100</span>
+</div>
+<div class="flex items-center justify-end gap-xs text-primary">
+<span class="material-symbols-outlined text-sm">radio_button_checked</span>
+                        STATUS: READY
+                    </div>
+</div>
+</div>
+<!-- Simulation Layout -->
+<div class="flex-1 flex gap-lg min-h-0">
+<!-- Center/Left: Topology & Controls -->
+<div class="flex-1 flex flex-col gap-lg min-w-0">
+<!-- Topology Canvas -->
+<div class="flex-1 bg-surface border border-outline-variant rounded-lg relative overflow-hidden flex flex-col">
+<!-- Canvas Header -->
+<div class="h-10 border-b border-outline-variant bg-surface-container-low flex justify-between items-center px-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant">SIMULATION ENVIRONMENT</span>
+<div class="flex gap-xs">
+<button class="p-1 hover:bg-surface-variant rounded text-on-surface-variant"><span class="material-symbols-outlined text-sm">zoom_in</span></button>
+<button class="p-1 hover:bg-surface-variant rounded text-on-surface-variant"><span class="material-symbols-outlined text-sm">zoom_out</span></button>
+<button class="p-1 hover:bg-surface-variant rounded text-on-surface-variant"><span class="material-symbols-outlined text-sm">fit_screen</span></button>
+</div>
+</div>
+<!-- Canvas Area -->
+<div class="flex-1 bg-topology-grid relative">
+<!-- SVG Connections -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 10;">
+<!-- Path 1: Mobile -> Infotainment -->
+<path d="M 150 200 C 250 200, 250 200, 350 200" fill="none" stroke="#3e484f" stroke-dasharray="8 8" stroke-width="2"></path>
+<path class="animate-flow" d="M 150 200 C 250 200, 250 200, 350 200" fill="none" stroke="#ffb4ab" stroke-width="2"></path>
+<!-- Path 2: Infotainment -> Gateway -->
+<path d="M 350 200 C 450 200, 450 300, 550 300" fill="none" stroke="#3e484f" stroke-dasharray="8 8" stroke-width="2"></path>
+<!-- Path 3: Gateway -> CAN -->
+<path d="M 550 300 C 650 300, 650 300, 750 300" fill="none" stroke="#3e484f" stroke-dasharray="8 8" stroke-width="2"></path>
+<!-- Path 4: CAN -> ECU -->
+<path d="M 750 300 C 850 300, 850 200, 950 200" fill="none" stroke="#3e484f" stroke-dasharray="8 8" stroke-width="2"></path>
+</svg>
+<!-- Nodes -->
+<!-- Node 1: Mobile App -->
+<div class="absolute top-[180px] left-[50px] z-20 w-[100px] flex flex-col items-center gap-xs">
+<div class="w-12 h-12 bg-surface-container-high border-2 border-primary rounded-lg flex items-center justify-center glow-red bg-surface-container-low">
+<span class="material-symbols-outlined text-primary">smartphone</span>
+</div>
+<div class="text-center">
+<div class="font-mono-data text-[11px] text-on-surface-variant">ENTRY POINT</div>
+<div class="font-title-md text-[14px] text-on-surface leading-tight">Mobile App</div>
+</div>
+</div>
+<!-- Node 2: Infotainment -->
+<div class="absolute top-[180px] left-[350px] z-20 w-[120px] flex flex-col items-center gap-xs">
+<div class="w-12 h-12 bg-surface-container-high border border-outline-variant rounded-lg flex items-center justify-center bg-surface-container-low">
+<span class="material-symbols-outlined text-on-surface-variant">dashboard_customize</span>
+</div>
+<div class="text-center">
+<div class="font-mono-data text-[11px] text-on-surface-variant">AFFECTED COMPONENT</div>
+<div class="font-title-md text-[14px] text-on-surface leading-tight">Infotainment</div>
+</div>
+</div>
+<!-- Node 3: Vehicle Gateway -->
+<div class="absolute top-[280px] left-[550px] z-20 w-[120px] flex flex-col items-center gap-xs">
+<div class="w-12 h-12 bg-surface-container-high border border-outline-variant rounded-lg flex items-center justify-center bg-surface-container-low">
+<span class="material-symbols-outlined text-on-surface-variant">router</span>
+</div>
+<div class="text-center">
+<div class="font-mono-data text-[11px] text-on-surface-variant">GATEWAY</div>
+<div class="font-title-md text-[14px] text-on-surface leading-tight">Vehicle Gateway</div>
+</div>
+</div>
+<!-- Node 4: CAN Network -->
+<div class="absolute top-[280px] left-[750px] z-20 w-[120px] flex flex-col items-center gap-xs">
+<div class="w-12 h-12 bg-surface-container-high border border-outline-variant rounded-full flex items-center justify-center bg-surface-container-low">
+<span class="material-symbols-outlined text-on-surface-variant">hub</span>
+</div>
+<div class="text-center">
+<div class="font-mono-data text-[11px] text-on-surface-variant">NETWORK</div>
+<div class="font-title-md text-[14px] text-on-surface leading-tight">CAN Network</div>
+</div>
+</div>
+<!-- Node 5: Powertrain ECU -->
+<div class="absolute top-[180px] left-[950px] z-20 w-[120px] flex flex-col items-center gap-xs">
+<div class="w-12 h-12 bg-surface-container-high border border-primary rounded-lg flex items-center justify-center bg-surface-container-low">
+<span class="material-symbols-outlined text-primary">memory</span>
+</div>
+<div class="text-center">
+<div class="font-mono-data text-[11px] text-primary">CRITICAL ASSET</div>
+<div class="font-title-md text-[14px] text-on-surface leading-tight">Powertrain ECU</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Controls & Timeline -->
+<div class="h-48 flex gap-lg">
+<!-- Control Panel -->
+<div class="w-1/3 bg-surface border border-outline-variant rounded-lg p-md flex flex-col justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-xs">SIMULATION PROGRESS</div>
+<div class="font-headline-lg text-headline-lg text-on-surface">0 / 5 STEPS</div>
+<div class="w-full bg-surface-variant h-1 rounded-full mt-sm overflow-hidden">
+<div class="w-1/5 h-full bg-primary"></div>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="flex-1 bg-primary-container text-on-primary-container font-label-caps text-label-caps py-sm px-sm rounded-DEFAULT hover:opacity-90 flex justify-center items-center gap-xs">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+                                    START
+                                </button>
+<button class="bg-surface-variant border border-outline-variant text-on-surface hover:bg-surface-container-highest font-label-caps text-label-caps py-sm px-md rounded-DEFAULT flex justify-center items-center">
+<span class="material-symbols-outlined text-sm">pause</span>
+</button>
+<button class="bg-surface-variant border border-outline-variant text-on-surface hover:bg-surface-container-highest font-label-caps text-label-caps py-sm px-md rounded-DEFAULT flex justify-center items-center">
+<span class="material-symbols-outlined text-sm">restart_alt</span>
+</button>
+</div>
+</div>
+<!-- Timeline -->
+<div class="flex-1 bg-surface border border-outline-variant rounded-lg p-md flex flex-col">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-md">EXECUTION TIMELINE</div>
+<div class="flex-1 flex justify-between items-center px-sm relative">
+<!-- Connecting Line -->
+<div class="absolute left-[30px] right-[30px] top-1/2 -translate-y-1/2 h-[2px] bg-outline-variant z-0"></div>
+<div class="absolute left-[30px] right-[80%] top-1/2 -translate-y-1/2 h-[2px] bg-primary z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-on-primary border-[3px] border-surface">
+<span class="material-symbols-outlined text-[12px] font-bold">check</span>
+</div>
+<div class="font-mono-data text-[10px] text-primary">01 Entry Point</div>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-6 h-6 rounded-full bg-surface border-2 border-primary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+</div>
+<div class="font-mono-data text-[10px] text-on-surface">02 Weakness</div>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-6 h-6 rounded-full bg-surface border-2 border-outline-variant flex items-center justify-center">
+</div>
+<div class="font-mono-data text-[10px] text-on-surface-variant">03 Lateral Move</div>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-6 h-6 rounded-full bg-surface border-2 border-outline-variant flex items-center justify-center">
+</div>
+<div class="font-mono-data text-[10px] text-on-surface-variant">04 Trust Bound</div>
+</div>
+<!-- Step 5 -->
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-6 h-6 rounded-full bg-surface border-2 border-outline-variant flex items-center justify-center">
+</div>
+<div class="font-mono-data text-[10px] text-on-surface-variant opacity-50">05 Target</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Intelligence Panel -->
+<div class="w-[380px] flex flex-col gap-md">
+<!-- Current Step Details -->
+<div class="flex-1 glass-panel rounded-lg p-md flex flex-col gap-md">
+<div class="flex items-center gap-sm text-primary border-b border-outline-variant pb-sm">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps text-label-caps">CURRENT STEP ANALYSIS</span>
+</div>
+<div>
+<div class="font-mono-data text-mono-data text-primary mb-1">STEP 01 — ENTRY POINT</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-xs">Compromised Mobile Application</h3>
+<div class="inline-flex items-center gap-xs bg-surface-variant px-2 py-1 rounded text-xs font-mono-data text-on-surface-variant mb-md border border-outline-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                                ACTIVE
+                            </div>
+</div>
+<div class="flex flex-col gap-sm">
+<div class="bg-surface-container-low p-sm rounded border border-outline-variant">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">WHAT IS HAPPENING?</div>
+<p class="font-body-sm text-body-sm text-on-surface opacity-90">The simulation is injecting a malformed authentication payload via the companion app's API endpoint, mimicking a documented reverse-engineering vulnerability.</p>
+</div>
+<div class="bg-surface-container-low p-sm rounded border border-outline-variant">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">WHY IT MATTERS</div>
+<p class="font-body-sm text-body-sm text-on-surface opacity-90">Success here bypasses initial perimeter defense, granting authenticated status required to interact with the vehicle's telematics API.</p>
+</div>
+</div>
+<!-- AI Context -->
+<div class="mt-auto pt-md border-t border-outline-variant">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-tertiary text-sm">auto_awesome</span>
+<span class="font-label-caps text-label-caps text-tertiary">BREAKPOINT INTELLIGENCE</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-sm italic">"This vector targets CVE-2023-XXXX. Similar attacks in the wild usually proceed to probe the Infotainment CAN bus gateway within 400ms of auth bypass."</p>
+<button class="w-full bg-transparent border border-tertiary text-tertiary font-label-caps text-label-caps py-xs rounded hover:bg-tertiary/10 transition-colors flex justify-center items-center gap-xs">
+                                EXPLAIN THIS STEP
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Disclaimer -->
+<div class="flex justify-center items-center gap-sm pt-xs border-t border-outline-variant text-on-surface-variant font-mono-data text-[11px] opacity-70">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                SAFE SIMULATION: BREAKPOINT only replays modeled attack paths against digital twins. No real system is accessed or modified during this operation.
+            </div>
+</main>
+</div>
+</body></html>
