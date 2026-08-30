@@ -8,7 +8,11 @@ from . import models
 Base.metadata.create_all(bind=engine)
 app=FastAPI(title='BREAKPOINT API',version='1.1.0',description='Defensive cybersecurity analysis backend for the BREAKPOINT prototype.')
 origins=[o.strip() for o in os.getenv('CORS_ORIGINS','http://localhost:5173').split(',') if o.strip() and o.strip() != '*']
-app.add_middleware(CORSMiddleware,allow_origins=origins,allow_credentials=True,allow_methods=['GET','POST','DELETE','OPTIONS'],allow_headers=['Authorization','Content-Type'])
+app.add_middleware(CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"])
 app.include_router(projects.router); app.include_router(scans.router); app.include_router(vulnerabilities.router); app.include_router(analysis.router)
 app.include_router(ai.router); app.include_router(auth.router)
 @app.middleware('http')
