@@ -1,36 +1,10 @@
 {
+  "cleanUrls": true,
   "rewrites": [
-    {
-      "source": "/dashboard",
-      "destination": "/dashboard/index.html"
-    },
-    {
-      "source": "/scans",
-      "destination": "/scans/index.html"
-    },
-    {
-      "source": "/vulnerability",
-      "destination": "/vulnerability/index.html"
-    },
-    {
-      "source": "/attack-paths",
-      "destination": "/attack-paths/index.html"
-    },
-    {
-      "source": "/simulation",
-      "destination": "/simulation/index.html"
-    },
-    {
-      "source": "/what-if",
-      "destination": "/what-if/index.html"
-    },
-    {
-      "source": "/validation",
-      "destination": "/validation/index.html"
-    },
-    {
-      "source": "/auth",
-      "destination": "/auth/index.html"
-    }
+    { "source": "/", "destination": "/welcome/index.html" },
+    { "source": "/welcome", "destination": "/welcome/index.html" },
+    { "source": "/dashboard", "destination": "/dashboard/index.html" },
+    { "source": "/scans", "destination": "/scans/index.html" },
+    { "source": "/simulation", "destination": "/simulation/index.html" }
   ]
 }
