@@ -15,8 +15,8 @@ class AIRequest(BaseModel):
 @router.get("/status")
 def ai_status(user: User = Depends(current_user)):
     return {
-        "configured": bool(os.getenv("GEMINI_API_KEY")), 
-        "model": os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
+        "configured": bool(os.getenv("GEMINI_API_KEY")),
+        "model": os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
     }
 
 @router.post("/analyze")
@@ -24,11 +24,12 @@ def analyze(payload: AIRequest, user: User = Depends(current_user)):
     key = os.getenv("GEMINI_API_KEY")
     if not key:
         raise HTTPException(503, "AI is not configured. Add GEMINI_API_KEY to the backend environment.")
-    
+
     # Initialize the Gemini Client
     client = genai.Client(api_key=key)
-    model = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
-       system_instruction = (
+    model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+
+    system_instruction = (
         "You are BREAKPOINT AI Security Analyst. You are a defensive cybersecurity assistant. "
         "Analyze only the supplied application/security context. Give clear, practical remediation advice. "
         "Do not provide instructions for unauthorized access, credential theft, persistence, malware, or destructive exploitation. "
@@ -37,10 +38,10 @@ def analyze(payload: AIRequest, user: User = Depends(current_user)):
         "Use short sentences and everyday language, as if explaining to a product manager, not another engineer. "
         "Keep answers concise and structured with: What's wrong (plain language), Why it matters (real-world consequence), How to fix it (simple steps), How to check it's fixed."
     )
-    
+
     context = payload.context or {}
     user_input = f"Security context: {context}\n\nUser request: {payload.prompt}"
-    
+
     try:
         response = client.models.generate_content(
             model=model,
