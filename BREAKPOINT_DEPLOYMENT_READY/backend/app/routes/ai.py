@@ -15,13 +15,13 @@ class AIRequest(BaseModel):
 @router.get("/status")
 def ai_status(user: User = Depends(current_user)):
     return {
-        "configured": bool(os.getenv("AQ.Ab8RN6K99zabPapcEPvm52QDUVBEkhBm2qPvAGuj8JQkzKbaRQ")), 
+        "configured": bool(os.getenv("GEMINI_API_KEY")), 
         "model": os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
     }
 
 @router.post("/analyze")
 def analyze(payload: AIRequest, user: User = Depends(current_user)):
-    key = os.getenv("AQ.Ab8RN6K99zabPapcEPvm52QDUVBEkhBm2qPvAGuj8JQkzKbaRQ")
+    key = os.getenv("GEMINI_API_KEY")
     if not key:
         raise HTTPException(503, "AI is not configured. Add GEMINI_API_KEY to the backend environment.")
     
