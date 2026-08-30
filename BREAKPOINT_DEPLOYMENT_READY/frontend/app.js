@@ -19,6 +19,7 @@
     simulation: '../simulation/index.html',
     'what-if': '../what-if/index.html',
     validation: '../validation/index.html',
+    settings: '../settings/index.html',
     auth: '../auth/index.html'
   };
 
@@ -210,21 +211,30 @@
 
   // Navigation Event Listener
   function bindGlobalNavigation() {
-    document.querySelectorAll('a, button').forEach(el => {
-      const txt = textContent(el);
-      if (txt === 'INITIALIZE SESSION' || txt === 'NEW_SESSION') el.onclick = createProject;
-      if (txt.includes('RUN NEW SCAN') || txt === 'RE-SCAN') el.onclick = startScan;
-      if (txt === 'START SIMULATION' || txt.includes('EXECUTE SIMULATION')) el.onclick = runSimulation;
-      if (txt.includes('SAVE CONFIGURATION') || txt.includes('APPLY TO TESTBED')) el.onclick = runWhatIf;
-      if (txt.includes('RUN NEW ANALYSIS')) el.onclick = runValidation;
+    document.addEventListener('click', e => {
+      const target = e.target.closest('a, button');
+      if (!target) return;
+      const txt = textContent(target);
+
+      if (txt === 'INITIALIZE SESSION' || txt === 'NEW_SESSION') createProject();
+      if (txt.includes('RUN NEW SCAN') || txt === 'RE-SCAN') startScan();
+      if (txt === 'START SIMULATION' || txt.includes('EXECUTE SIMULATION')) runSimulation();
+      if (txt.includes('SAVE CONFIGURATION') || txt.includes('APPLY TO TESTBED')) runWhatIf();
+      if (txt.includes('RUN NEW ANALYSIS')) runValidation();
       
-      if (txt === 'DASHBOARD' || txt === 'OVERVIEW') el.onclick = e => { e.preventDefault(); go('dashboard'); };
-      if (txt.includes('FINDING') || txt === 'SECURITY RESULTS') el.onclick = e => { e.preventDefault(); go('scans'); };
-      if (txt.includes('ATTACK PATH')) el.onclick = e => { e.preventDefault(); go('attack-paths'); };
-      if (txt.includes('SIMULATION')) el.onclick = e => { e.preventDefault(); go('simulation'); };
-      if (txt.includes('WHAT-IF')) el.onclick = e => { e.preventDefault(); go('what-if'); };
-      if (txt.includes('VALIDATION') || txt.includes('BEFORE/AFTER')) el.onclick = e => { e.preventDefault(); go('validation'); };
-      if (txt.includes('ASSET')) el.onclick = e => { e.preventDefault(); go('assets'); };
+      if (txt === 'DASHBOARD' || txt === 'OVERVIEW') { e.preventDefault(); go('dashboard'); }
+      if (txt.includes('FINDING') || txt === 'SECURITY RESULTS') { e.preventDefault(); go('scans'); }
+      if (txt.includes('ATTACK PATH')) { e.preventDefault(); go('attack-paths'); }
+      if (txt.includes('SIMULATION')) { e.preventDefault(); go('simulation'); }
+      if (txt.includes('WHAT-IF')) { e.preventDefault(); go('what-if'); }
+      if (txt.includes('VALIDATION') || txt.includes('BEFORE/AFTER')) { e.preventDefault(); go('validation'); }
+      if (txt.includes('ASSET')) { e.preventDefault(); go('assets'); }
+      if (txt.includes('SETTING') || txt.includes('SETTINGS')) { e.preventDefault(); go('settings'); }
+      if (txt.includes('ACCOUNT') || txt.includes('LOGOUT') || txt.includes('SIGN OUT')) {
+        e.preventDefault();
+        localStorage.removeItem('BREAKPOINT_TOKEN');
+        go('auth');
+      }
     });
   }
 
