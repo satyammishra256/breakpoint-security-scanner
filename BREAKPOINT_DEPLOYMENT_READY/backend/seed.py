@@ -1,25 +1,51 @@
 import os
-from app.database import SessionLocal, Base, engine
-from app import models
-from app.routes.auth import hash_password
-from app.models import Project, User
-from app.services.demo import create_demo_scan
+from fastapi import APIRouter, HTTPException, Depends
+from google import genai
+from google.genai import types
+from ..models import User
+from .auth import current_user
+from pydantic import BaseModel, Field
 
-Base.metadata.create_all(bind=engine)
-db=SessionLocal()
-try:
-    email=os.getenv('DEMO_EMAIL','demo@breakpoint.local').lower().strip()
-    password=os.getenv('DEMO_PASSWORD')
-    if not password:
-        raise RuntimeError('Set DEMO_PASSWORD before running seed.py')
-    user=db.query(User).filter_by(email=email).first()
-    if not user:
-        user=User(email=email,name='BREAKPOINT Demo',password_hash=hash_password(password))
-        db.add(user); db.commit(); db.refresh(user)
-    if not db.query(Project).filter_by(user_id=user.id).first():
-        p=Project(name='Connected Vehicle Demo',target_url='https://demo.breakpoint.local',description='Safe demo target for BREAKPOINT',user_id=user.id)
-        db.add(p); db.commit(); db.refresh(p); create_demo_scan(db,p)
-        print('Seeded project id:',p.id)
-    else: print('Database already seeded for demo user')
-finally:
-    db.close()
+router = APIRouter(prefix="/api/ai", tags=["ai"])
+
+class AIRequest(BaseModel):
+    prompt: str = Field(min_length=1, max_length=6000)
+    context: dict = Field(default_factory=dict)
+
+@router.get("/status")
+def ai_status(user: User = Depends(current_user)):
+    return {
+        "configured": bool(os.getenv("AQ.Ab8RN6K99zabPapcEPvm52QDUVBEkhBm2qPvAGuj8JQkzKbaRQ")), 
+        "model": os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    }
+
+@router.post("/analyze")
+def analyze(payload: AIRequest, user: User = Depends(current_user)):
+    key = os.getenv("AQ.Ab8RN6K99zabPapcEPvm52QDUVBEkhBm2qPvAGuj8JQkzKbaRQ")
+    if not key:
+        raise HTTPException(503, "AI is not configured. Add GEMINI_API_KEY to the backend environment.")
+    
+    # Initialize native Gemini Client
+    client = genai.Client(api_key=key)
+    model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    
+    system_instruction = (
+        "You are BREAKPOINT AI Security Analyst. You are a defensive cybersecurity assistant. "
+        "Analyze only the supplied application/security context. Give clear, practical remediation advice. "
+        "Keep answers concise and structured with: Assessment, Risk, Recommended Fix, Validation Check."
+    )
+    
+    context = payload.context or {}
+    user_input = f"Security context: {context}\n\nUser request: {payload.prompt}"
+    
+    try:
+        response = client.models.generate_content(
+            model=model,
+            contents=user_input,
+            config=types.GenerateContentConfig(
+                system_instruction=system_instruction,
+            ),
+        )
+        return {"answer": response.text, "model": model}
+    except Exception as exc:
+        raise HTTPException(502, f"AI provider request failed: {str(exc)}")
