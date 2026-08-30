@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html class="dark" lang="en"><head>
@@ -140,14 +141,26 @@
 </head>
 <body class="bg-background text-text-primary min-h-screen flex flex-col font-body-md overflow-x-hidden selection:bg-primary-container selection:text-text-primary">
 <!-- Top Navigation (Transactional intent - simplified shell) -->
-<header class="w-full h-16 border-b border-border-muted bg-surface flex items-center justify-between px-margin-desktop shrink-0">
-<div class="flex items-center gap-4">
+<header class="w-full h-16 border-b border-border-muted bg-surface flex items-center justify-between px-3 md:px-margin-desktop shrink-0 overflow-x-auto">
+<div class="flex items-center gap-4 shrink-0">
 <img alt="BREAKPOINT Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjbnvdjNtgnraUMvNCFz4OWW1X0btf1YPEbtafJgCueeCJxA-96BPivH4Gw15_zEVV4W-C79-HxWwu178_dMgbnv0R7rm8bwBPDntfj1s27EP4_ybEA3sXXEBT4PXl8BIeUV0wVIVCxcXYCukT4smHo3--AT8O0svawHHiqASl9XqX2MMFmNcwfgmxNx53F-3CwGdIaINm1ikEjoEmL5rAFy68Sj8s94an_4j4fLM6wAtLlGesn0REWw"/>
 <span class="font-display-lg text-title-md font-bold tracking-tighter text-on-surface border-l border-border-muted pl-4">BREAKPOINT</span>
 </div>
-<div class="font-label-mono text-label-mono text-on-surface-variant">
+<div class="flex items-center gap-2 md:gap-4 shrink-0">
+<span class="font-label-mono text-label-mono text-on-surface-variant hidden lg:inline">
             SYS_INIT // SECURE_ENV
-        </div>
+        </span>
+<!-- Account & Settings (wired to app.js showAccount()/showSettings() modals) -->
+<button id="bp-header-account" type="button" class="text-on-surface-variant hover:text-text-primary transition-colors cursor-pointer active:opacity-80 p-1.5 md:p-2 hover:bg-surface-container-highest flex items-center gap-1 font-label-mono text-label-mono shrink-0">
+<span class="material-symbols-outlined text-[20px] md:text-[24px]">account_circle</span>
+</button>
+<button id="bp-header-settings" type="button" class="text-on-surface-variant hover:text-text-primary transition-colors cursor-pointer active:opacity-80 p-1.5 md:p-2 hover:bg-surface-container-highest flex items-center gap-1 font-label-mono text-label-mono shrink-0">
+<span class="material-symbols-outlined text-[20px] md:text-[24px]">settings</span>
+</button>
+<a id="bp-header-auth" href="../auth/index.html" class="font-label-mono text-code-sm text-primary hover:text-inverse-primary border border-primary-container px-2 py-1 md:px-3 md:py-1.5 bg-[#1b1212] rounded transition-colors uppercase shrink-0 whitespace-nowrap">
+LOGIN
+</a>
+</div>
 </header>
 <!-- Main Content Canvas -->
 <main class="flex-grow flex flex-col lg:flex-row relative">
