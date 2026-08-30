@@ -8,10 +8,10 @@ services:
     envVars:
       - key: DATABASE_URL
         sync: false
-      - key: OPENAI_API_KEY
+      - key: GEMINI_API_KEY
         sync: false
-      - key: OPENAI_MODEL
-        value: gpt-5.6-luna
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
       - key: AUTH_SECRET
         generateValue: true
       - key: CORS_ORIGINS
