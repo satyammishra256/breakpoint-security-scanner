@@ -40,7 +40,7 @@ def analyze(payload: AIRequest, user: User = Depends(current_user)):
     context = payload.context or {}
     user_input = f"Security context: {context}\n\nUser request: {payload.prompt}"
     
-    try:
+       try:
         response = client.models.generate_content(
             model=model,
             contents=user_input,
@@ -50,4 +50,5 @@ def analyze(payload: AIRequest, user: User = Depends(current_user)):
         )
         return {"answer": response.text, "model": model}
     except Exception as exc:
+        print(f"GEMINI ERROR: {exc}")
         raise HTTPException(502, "AI provider request failed. Check backend logs for details.")
