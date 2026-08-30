@@ -26,3 +26,24 @@ async def security_headers(request, call_next):
 
 @app.get('/health')
 def health(): return {'status':'ok','service':'breakpoint-api'}
+    # Dummy Auth Endpoints for Deployment Testing
+@app.post("/api/auth/signup")
+@app.post("/api/signup")
+@app.post("/signup")
+async def mock_signup(data: dict = None):
+    return {
+        "status": "success",
+        "access_token": "mock-jwt-token-breakpoint-2026",
+        "token_type": "bearer",
+        "user": {"name": "Satyam Mishra", "email": "paradise-gangsta@gmail.com"}
+    }
+
+@app.post("/api/auth/login")
+@app.post("/api/login")
+@app.post("/login")
+async def mock_login(data: dict = None):
+    return {
+        "status": "success",
+        "access_token": "mock-jwt-token-breakpoint-2026",
+        "token_type": "bearer"
+    }
