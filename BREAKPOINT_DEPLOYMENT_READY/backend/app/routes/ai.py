@@ -16,7 +16,7 @@ class AIRequest(BaseModel):
 def ai_status(user: User = Depends(current_user)):
     return {
         "configured": bool(os.getenv("GEMINI_API_KEY")), 
-        "model": os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+        "model": os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
     }
 
 @router.post("/analyze")
@@ -27,7 +27,7 @@ def analyze(payload: AIRequest, user: User = Depends(current_user)):
     
     # Initialize the Gemini Client
     client = genai.Client(api_key=key)
-    model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    model = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
     
     system_instruction = (
         "You are BREAKPOINT AI Security Analyst. You are a defensive cybersecurity assistant. "
